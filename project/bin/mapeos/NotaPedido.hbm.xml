@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="datos.NotaPedido" table="notapedido">
+		<id column="idnotapedido" name="idNotaPedido">
+			<generator class="identity" />
+		</id>
+
+		<property column="fecha" name="fecha" type="LocalDate" />
+		<property column="cantestudiantes" name="cantEstudiantes" type="int" />
+
+		<many-to-one name="materia" class="datos.Materia"
+			column="idmateria" not-null="true" />
+
+		<joined-subclass name="datos.Final" table="final">
+			<key column="idfinal" />
+			<property column="fechaexamen" name="fechaExamen" type="LocalDate" />
+		</joined-subclass>
+
+		<joined-subclass name="datos.Curso" table="curso">
+			<key column="idcurso" />
+			<property column="codcurso" name="codCurso" type="string" />
+		</joined-subclass>
+
+	</class>
+</hibernate-mapping>
